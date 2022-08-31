@@ -1,0 +1,16 @@
+.item {
+  display: flex;
+  justify-content: space-between;
+  width: 220px;
+  padding: 5px;
+  border: 1px solid #000;
+  cursor: pointer;
+
+  & + & {
+    border-top: 0;
+  }
+}
+
+.active {
+  background-color: #cccecf;
+}
