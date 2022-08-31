@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import styles from './CertificateValueInput.module.scss';
 
 function CertificateValueInput({
@@ -18,3 +20,11 @@ function CertificateValueInput({
 }
 
 export default CertificateValueInput;
+
+CertificateValueInput.propTypes = {
+  subjectName: PropTypes.string.isRequired,
+  issuerName: PropTypes.string.isRequired,
+  validFrom: PropTypes.string.isRequired,
+  validTill: PropTypes.string.isRequired,
+  active: PropTypes.bool.isRequired,
+};
