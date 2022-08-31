@@ -80,6 +80,7 @@ export const App = () => {
                 isActive={currentId}
                 active={activeId === id}
                 id={id}
+                visible={visible}
               />
             ))}
           </div>
