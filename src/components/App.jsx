@@ -72,18 +72,21 @@ export const App = () => {
     <div className={styles.main}>
       <div className={styles.container}>
         <div className={styles.containerName}>
-          <div>
-            {fileValue?.map(({ id, subjectName }) => (
-              <CertificateName
-                key={id}
-                subjectName={subjectName}
-                isActive={currentId}
-                active={activeId === id}
-                id={id}
-                visible={visible}
-              />
-            ))}
-          </div>
+          {fileValue.length > 0 && (
+            <div>
+              {fileValue?.map(({ id, subjectName }) => (
+                <CertificateName
+                  key={id}
+                  subjectName={subjectName}
+                  isActive={currentId}
+                  active={activeId === id}
+                  id={id}
+                  visible={visible}
+                />
+              ))}
+            </div>
+          )}
+
           <button className={styles.button} onClick={getVisibleInput}>
             {visible ? 'Скасувати' : 'Додати'}
           </button>
