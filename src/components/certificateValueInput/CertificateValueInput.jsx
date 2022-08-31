@@ -8,10 +8,10 @@ function CertificateValueInput({
   active,
 }) {
   return (
-    <div className={styles.list + ' ' + (active ? styles.active : '')}>
-      <p>{` Subject Name: ${subjectName} \n`}</p>
-      <p>{` Issuer Name: ${issuerName} \n`}</p>
-      <p>{` Valid From: ${validFrom.slice(0, 10)} \n`}</p>
+    <div className={`${styles.list} ${active ? styles.active : ''}`}>
+      <p>{` Subject Name: ${subjectName} `}</p>
+      <p>{` Issuer Name: ${issuerName} `}</p>
+      <p>{` Valid From: ${validFrom.slice(0, 10)} `}</p>
       <p>{` Valid Till: ${validTill.slice(0, 10)} `}</p>
     </div>
   );

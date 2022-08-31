@@ -3,19 +3,29 @@
   align-items: center;
   justify-content: space-between;
   width: 250px;
-  padding: 5px;
+  padding: 7px;
   border: 1px solid #000;
+  background-color: #dedede;
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
 
   & + & {
     border-top: 0;
   }
+
+  &:hover {
+    background-color: #bdbdbd;
+  }
 }
 
 .cursor {
   cursor: default;
+
+  &:hover {
+    background-color: #dedede;
+  }
 }
 
 .active {
-  background-color: #cccecf;
+  background-color: #bdbdbd;
 }

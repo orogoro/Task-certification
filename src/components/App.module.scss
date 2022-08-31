@@ -6,11 +6,13 @@
 .container {
   display: flex;
   justify-content: space-between;
-  margin-top: 30px;
+  margin: 30px 0;
   padding: 30px;
   width: 600px;
   height: 400px;
-  background-color: #ebebeb;
+  border-radius: 5px;
+  box-shadow: 0 0 5px 0;
+  background-color: #edf0f0;
 }
 
 .lable {
@@ -24,21 +26,28 @@
 }
 
 .fake {
-  position: relative;
-  border: 1px solid #d0cfcf;
-  border-radius: 0 4px 4px 0;
-  color: #7e7e7e;
   display: flex;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  border: 2px solid #d0cfcf;
+  color: #7e7e7e;
   font-size: 16px;
   font-weight: 400;
   height: 200px;
   line-height: 26px;
   padding: 0 16px;
   border-radius: 3px;
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .fake.active {
   cursor: pointer;
+
+  &:hover {
+    border-color: #99cccf;
+    box-shadow: 0 0 5px;
+  }
 }
 
 .containerName {
@@ -58,10 +67,11 @@
   background-color: #aecfd1;
   border: none;
   box-shadow: 0 2px 4px rgb(0 0 0 / 15%);
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   cursor: pointer;
 
   &:hover {
-    background-color: #9fbdbf;
+    background-color: #99cccf;
   }
 }

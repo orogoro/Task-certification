@@ -6,13 +6,10 @@ function CertificateName({ id, subjectName, active, isActive, visible }) {
   };
   return (
     <div
-      className={
-        styles.item +
-        ' ' +
-        (active ? styles.active : '') +
-        ' ' +
-        (visible ? styles.cursor : '')
-      }
+      className={`${styles.item} 
+        ${active ? styles.active : ''} 
+        ${visible ? styles.cursor : ''}
+      `}
       onClick={onActive}
     >
       <p> {subjectName}</p>

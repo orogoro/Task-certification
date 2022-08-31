@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import ASN1 from '@lapo/asn1js';
 import { nanoid } from 'nanoid';
+
+import { getCertificateInfo } from 'helper';
 
 import CertificateName from './certificateName/CertificateName';
 import CertificateValueInput from './certificateValueInput/CertificateValueInput';
@@ -14,14 +15,14 @@ export const App = () => {
   const [activeId, setActiveId] = useState('');
   const [visible, setVisible] = useState(false);
 
-  const currentId = id => {
+  const handleIdChange = id => {
     if (visible) {
       return;
     }
     setActiveId(id);
   };
 
-  const getVisibleInput = () => {
+  const toggleInputVisibility = () => {
     if (visible) {
       setVisible(false);
       return;
@@ -30,24 +31,13 @@ export const App = () => {
     setActiveId('');
   };
 
-  const getTextValue = seq =>
-    seq.sub?.[0] ? seq.sub[0].sub[1].content() : seq.content();
-
   const fileInput = e => {
     const fr = new FileReader();
 
     fr.onload = () => {
-      const asn1 = ASN1.decode(fr.result);
-      const certificateInfo = asn1.sub[0];
-
-      const subjectInfo = certificateInfo.sub[5];
-      const issuerInfo = certificateInfo.sub[3];
-      const validityInfo = certificateInfo.sub[4];
-
-      const subjectCN = getTextValue(subjectInfo.sub[3]);
-      const issuerCN = getTextValue(issuerInfo.sub[2]);
-      const validFrom = getTextValue(validityInfo.sub[0]);
-      const validTill = getTextValue(validityInfo.sub[1]);
+      const { subjectCN, issuerCN, validFrom, validTill } = getCertificateInfo(
+        fr.result
+      );
 
       const result = {
         id: nanoid(),
@@ -72,22 +62,24 @@ export const App = () => {
     <div className={styles.main}>
       <div className={styles.container}>
         <div className={styles.containerName}>
-          {fileValue.length > 0 && (
+          {fileValue.length > 0 ? (
             <div>
               {fileValue?.map(({ id, subjectName }) => (
                 <CertificateName
                   key={id}
                   subjectName={subjectName}
-                  isActive={currentId}
+                  isActive={handleIdChange}
                   active={activeId === id}
                   id={id}
                   visible={visible}
                 />
               ))}
             </div>
+          ) : (
+            'Додайте ваш сертифікат'
           )}
 
-          <button className={styles.button} onClick={getVisibleInput}>
+          <button className={styles.button} onClick={toggleInputVisibility}>
             {visible ? 'Скасувати' : 'Додати'}
           </button>
         </div>
@@ -99,9 +91,10 @@ export const App = () => {
               type="file"
               name="file"
               onChange={fileInput}
+              accept=".cer"
             />
           )}
-          <div className={styles.fake + ' ' + (visible ? styles.active : '')}>
+          <div className={`${styles.fake} ${visible ? styles.active : ''}`}>
             {visible && 'Перетягніть файл сертифіката у поле'}
             {!visible &&
               activeId &&
